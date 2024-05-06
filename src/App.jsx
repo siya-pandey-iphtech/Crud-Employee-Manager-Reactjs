@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div >
-    <h1>Welcome User </h1>
+    <h1 className='font-bold text-2xl text-gray-950'>Welcome User </h1>
     <AddNewModal employees={employees} setEmployees={setEmployees}/>
      <EmployeeTable employees={employees}/>
     </div>
