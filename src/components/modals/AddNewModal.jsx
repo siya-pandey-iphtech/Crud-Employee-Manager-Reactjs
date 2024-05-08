@@ -37,7 +37,7 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
     dob: '',
     city: '',
     state: '',
-    phone: '',
+    phone:'' ,
     address: '',
     profile_photo: ''
   })
@@ -100,7 +100,7 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
 
   return (
     <div className="flex items-c  justify-c ">
-      
+
       <Dialog
         size="xs"
         open={open}
@@ -121,6 +121,7 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
           <CardBody className="flex flex-col gap-4 ">
 
             <Input
+              disabled={mode === 'view'}
               label=" Name "
               name="name"
               value={formData.name}
@@ -128,6 +129,8 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
               onChange={handleChange}
             />
             <Input
+              disabled={mode === 'view'}
+
               label=" Email "
               name="email"
               value={formData.email}
@@ -135,6 +138,8 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
               onChange={handleChange}
             />
             <Input
+              disabled={mode === 'view'}
+
               label="  DOB "
               name="dob"
               value={formData.dob}
@@ -142,6 +147,8 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
               onChange={handleChange}
             />
             <Input
+              disabled={mode === 'view'}
+
               label="  Ctiy "
               name="city"
               value={formData.city}
@@ -149,6 +156,8 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
               onChange={handleChange}
             />
             <Input
+              disabled={mode === 'view'}
+
               label="  State "
               name="state"
               value={formData.state}
@@ -156,6 +165,8 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
               onChange={handleChange}
             />
             <Input
+              disabled={mode === 'view'}
+
               label="  Phone no."
               name="phone"
               value={formData.phone}
@@ -163,6 +174,8 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
               onChange={handleChange}
             />
             <Input
+              disabled={mode === 'view'}
+
               label="  Address"
               name="address"
               value={formData.address}
@@ -170,6 +183,8 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
               onChange={handleChange}
             />
             <Input
+              disabled={mode === 'view'}
+
               label="  Profile Photo URL "
               name="profile_photo"
               value={formData.profile_photo}
