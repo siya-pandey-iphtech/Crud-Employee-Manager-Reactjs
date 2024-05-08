@@ -33,7 +33,7 @@ export const EmployeeTable = () => {
     className={index % 2 === 0 ? 'bg-gray-100' : ''}
     >
       {TABLE_HEAD.map((head) => (
-        <td key={head} className="p-2 border-b border-blue-gray-100">
+        <td key={head} className="p-2 border-b border-blue-gray-100 ">
           {head === "profile_photo" ? (
             <img
               className="rounded-xl w-20 h-24"
@@ -45,7 +45,7 @@ export const EmployeeTable = () => {
           )}
         </td>
       ))}
-      <td className="p-2 border-b border-blue-gray-100">
+      <td className=" py-5  flex border-b  border-blue-gray-100 ">
        
         {/* Edit Button  */}
        
@@ -90,8 +90,8 @@ export const EmployeeTable = () => {
         setEmployeeId={setEmployeeId}
       />
 
-      <Card className=" w-fit border-8 border-gray-500 ">
-        <table className=" w-fit min-w-max table-auto text-left rounded-2xl ">
+      <Card className=" w-full sm:w-3/4 md:w-2/3  mx-auto border-8 overflow-auto border-gray-500 ">
+        <table className=" table-auto text-left rounded-2xl ">
           <thead>
             <tr >
               {TABLE_HEAD.map((head) => (
@@ -119,7 +119,7 @@ export const EmployeeTable = () => {
               </th>
             </tr>
           </thead>
-          <tbody className=" h-36 overflow-auto">{TABLE_ROWS}</tbody>
+          <tbody className=" h-36 overflow-scroll">{TABLE_ROWS}</tbody>
         </table>
       </Card>
     </>
