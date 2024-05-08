@@ -27,10 +27,9 @@ import Title from "../Title";
 import Input from "../Input";
 import { customAlphabet } from 'nanoid';
 
-export function AddNewModal({ employees ,setEmployees }) {
+export function AddNewModal({ open, setOpen, employees, setEmployees, editMode, setEditMode, editingId, setEditingId, viewMode, setViewMode }) {
   const nanoid = customAlphabet('0123456789', 4);
 
-  const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     id: '',
     name: '',
@@ -43,18 +42,18 @@ export function AddNewModal({ employees ,setEmployees }) {
     profile_photo: ''
   })
   const handleOpen = () => setOpen(!open);
-  const clearForm=()=>{
+  const clearForm = () => {
     setFormData({
-    id: '',
-    name: '',
-    email: '',
-    dob: '',
-    city: '',
-    state: '',
-    phone: '',
-    address: '',
-    profile_photo: ''
-  })
+      id: '',
+      name: '',
+      email: '',
+      dob: '',
+      city: '',
+      state: '',
+      phone: '',
+      address: '',
+      profile_photo: ''
+    })
   }
   const handleChange = (e) => {
     setFormData({
@@ -64,7 +63,7 @@ export function AddNewModal({ employees ,setEmployees }) {
   };
 
   const handleAddProfile = () => {
-  
+
     setEmployees([
       ...employees,
       {
@@ -86,7 +85,7 @@ export function AddNewModal({ employees ,setEmployees }) {
 
   return (
     <div className="flex items-center justify-center">
-      <SButton onClick={handleOpen}>  Create <FontAwesomeIcon icon={faAdd} /></SButton>
+      <SButton onClick={() => { setEditMode(false); setViewMode(false); handleOpen(); }}>  Create <FontAwesomeIcon icon={faAdd} /></SButton>
       <Dialog
         size="xs"
         open={open}
@@ -98,11 +97,11 @@ export function AddNewModal({ employees ,setEmployees }) {
         <Card className="mx-auto border-2 bg-white  shadow-2xl p-5 w-full max-w-[24rem]">
           <DialogHeader className="justify-between">
             <div className="flex justify-center items-center text-center">
-              <Title className="text-center">User Details </Title>
+              {editMode ? <Title className="text-center">Edit Details</Title> : (viewMode ? <Title className="text-center">View User</Title> : <Title className="text-center">Create New</Title>)}
             </div>
-            
-              <FontAwesomeIcon className=" cursor-pointer" icon={faClose} onClick={handleOpen}/>
-            
+
+            <FontAwesomeIcon className=" cursor-pointer" icon={faClose} onClick={handleOpen} />
+
           </DialogHeader>
           <CardBody className="flex flex-col gap-4 ">
 
@@ -162,7 +161,8 @@ export function AddNewModal({ employees ,setEmployees }) {
               type="text"
               onChange={handleChange}
             />
-            <SButton onClick={handleAddProfile}>Add <FontAwesomeIcon icon={faAdd}/></SButton>
+            {editMode ? <SButton>Save Changes <FontAwesomeIcon icon={faEdit} /></SButton>:(viewMode ? '':<SButton onClick={handleAddProfile}>Add <FontAwesomeIcon icon={faAdd} /></SButton>)}
+            
 
           </CardBody>
 
