@@ -5,11 +5,9 @@ import { AddNewModal } from "./components/modals/AddNewModal";
 import employeesData from "./components/data/employees.json";
 function App() {
   const [open, setOpen] = useState(false);
-
+const [mode,setMode]=useState('create');
   const [employees, setEmployees] = useState(employeesData);
-  const [editMode, setEditMode] = useState(false);
-  const [editingId, setEditingId] = useState(null);
-  const [viewMode, setViewMode] = useState(false);
+  const [employeeId, setEmployeeId] = useState(null);
   return (
     <div>
       <h1 className="font-bold text-2xl text-gray-950">Welcome User </h1>
@@ -18,24 +16,20 @@ function App() {
         setOpen={setOpen}
         employees={employees}
         setEmployees={setEmployees}
-        editMode={editMode}
-        setEditMode={setEditMode}
-        editingId={editingId}
-        setEditingId={setEditingId}
-        viewMode={viewMode}
-        setViewMode={setViewMode}
+        mode={mode}
+        setMode={setMode}
+        employeeId={employeeId}
+        setEmployeeId={setEmployeeId}
       />
       <EmployeeTable
         open={open}
         setOpen={setOpen}
         employees={employees}
         setEmployees={setEmployees}
-        editMode={editMode}
-        setEditMode={setEditMode}
-        editingId={editingId}
-        setEditingId={setEditingId}
-        viewMode={viewMode}
-        setViewMode={setViewMode}
+        mode={mode}
+        setMode={setMode}
+        employeeId={employeeId}
+        setEmployeeId={setEmployeeId}
       />
     </div>
   );

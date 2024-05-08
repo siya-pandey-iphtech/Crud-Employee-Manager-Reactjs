@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faEye } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
-export const EmployeeTable = ({ open, setOpen, employees , setEmployees, editMode,setEditMode,editingId,setEditingId ,viewMode,setViewMode }) => {
+export const EmployeeTable = ({ open, setOpen, employees , setEmployees, mode,setMode,employeeId,setEmployeeId  }) => {
 
   
   const TABLE_HEAD = [
@@ -20,13 +20,11 @@ export const EmployeeTable = ({ open, setOpen, employees , setEmployees, editMod
   ];
 
   const toggleEditMode = (id) => {
-   setEditMode(!editMode)
-    setEditingId(id);
+  
     setOpen(true);
   };
   const handleExitEditMode = () => {
-    setEditMode(!editMode);
-    setEditingId(null);
+   
     setOpen(false);
   };
   const TABLE_ROWS = employees.map((employee) => (
@@ -45,21 +43,25 @@ export const EmployeeTable = ({ open, setOpen, employees , setEmployees, editMod
         </td>
       ))}
       <td className="p-4 border-b border-blue-gray-100">
+       {/* Edit Button  */}
         <SButton
           className="bg-amber-400"
           onClick={() => {
-            toggleEditMode(employee.id);
-            setEditMode(true);
+            
           }}
         >
           <FontAwesomeIcon icon={faEdit} />
         </SButton>
+
+         {/* View Button  */}
         <SButton
           className="bg-blue-400"
           onClick={() => {
-            setEditMode(false);
-           setViewMode(true);
+            
+           setMode('view');
+           setEmployeeId(employee.id);
            setOpen(true);
+           
           }}
         >
           <FontAwesomeIcon icon={faEye} />

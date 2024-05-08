@@ -27,9 +27,9 @@ import Title from "../Title";
 import Input from "../Input";
 import { customAlphabet } from 'nanoid';
 
-export function AddNewModal({ open, setOpen, employees, setEmployees, editMode, setEditMode, editingId, setEditingId, viewMode, setViewMode }) {
+export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setMode, employeeId, setEmployeeId }) {
   const nanoid = customAlphabet('0123456789', 4);
-
+  const empId = employeeId;
   const [formData, setFormData] = useState({
     id: '',
     name: '',
@@ -41,7 +41,22 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, editMode, 
     address: '',
     profile_photo: ''
   })
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = () => {
+    prepareForm();
+    setOpen(!open);
+    if (!open) { clearForm(); }
+  };
+  const prepareForm = () => {
+    if (mode === 'edit' || mode === 'view') {
+      const employee = employees.find(emp => emp.id === empId)
+      if (employee) {
+        setFormData(employee);
+      }
+      else {
+        clearForm();
+      }
+    }
+  }
   const clearForm = () => {
     setFormData({
       id: '',
@@ -84,8 +99,8 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, editMode, 
   }
 
   return (
-    <div className="flex items-center justify-center">
-      <SButton onClick={() => { setEditMode(false); setViewMode(false); handleOpen(); }}>  Create <FontAwesomeIcon icon={faAdd} /></SButton>
+    <div className="flex items-c  justify-c ">
+      <SButton onClick={() => { handleOpen(); }}>  Create <FontAwesomeIcon icon={faAdd} /></SButton>
       <Dialog
         size="xs"
         open={open}
@@ -96,8 +111,8 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, editMode, 
 
         <Card className="mx-auto border-2 bg-white  shadow-2xl p-5 w-full max-w-[24rem]">
           <DialogHeader className="justify-between">
-            <div className="flex justify-center items-center text-center">
-              {editMode ? <Title className="text-center">Edit Details</Title> : (viewMode ? <Title className="text-center">View User</Title> : <Title className="text-center">Create New</Title>)}
+            <div className="flex justify-c  items-c  text-c ">
+              {mode === 'edit' ? <Title className="text-c ">Edit Details</Title> : (mode === 'view' ? <Title className="text-c ">View User</Title> : <Title className="text-c ">Create New</Title>)}
             </div>
 
             <FontAwesomeIcon className=" cursor-pointer" icon={faClose} onClick={handleOpen} />
@@ -106,63 +121,63 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, editMode, 
           <CardBody className="flex flex-col gap-4 ">
 
             <Input
-              label="Enter Name "
+              label=" Name "
               name="name"
               value={formData.name}
               type="text"
               onChange={handleChange}
             />
             <Input
-              label="Enter Email "
+              label=" Email "
               name="email"
               value={formData.email}
               type="email"
               onChange={handleChange}
             />
             <Input
-              label="Enter DOB "
+              label="  DOB "
               name="dob"
               value={formData.dob}
               type="date"
               onChange={handleChange}
             />
             <Input
-              label="Enter Ctiy "
+              label="  Ctiy "
               name="city"
               value={formData.city}
               type="text"
               onChange={handleChange}
             />
             <Input
-              label="Enter State "
+              label="  State "
               name="state"
               value={formData.state}
               type="text"
               onChange={handleChange}
             />
             <Input
-              label="Enter Phone no."
+              label="  Phone no."
               name="phone"
               value={formData.phone}
               type="number"
               onChange={handleChange}
             />
             <Input
-              label="Enter Address"
+              label="  Address"
               name="address"
               value={formData.address}
               type="text"
               onChange={handleChange}
             />
             <Input
-              label="Enter Profile Photo URL "
+              label="  Profile Photo URL "
               name="profile_photo"
               value={formData.profile_photo}
               type="text"
               onChange={handleChange}
             />
-            {editMode ? <SButton>Save Changes <FontAwesomeIcon icon={faEdit} /></SButton>:(viewMode ? '':<SButton onClick={handleAddProfile}>Add <FontAwesomeIcon icon={faAdd} /></SButton>)}
-            
+            {mode === 'edit' ? <SButton>Save Changes <FontAwesomeIcon icon={faEdit} /></SButton> : (mode === 'view' ? '' : <SButton onClick={handleAddProfile}>Add <FontAwesomeIcon icon={faAdd} /></SButton>)}
+
 
           </CardBody>
 
