@@ -1,17 +1,13 @@
 import "./App.css";
 import { EmployeeTable } from "./components/EmployeeTable";
-const Page=()=> {
-  
-
-  
+const Page = () => {
   return (
-    <div>
-      <h1 className="font-bold text-2xl text-gray-950">Welcome User </h1>  
-     
-     
-      <EmployeeTable  />
+    <div className=" flex flex-col justify-center items-center">
+      <h1 className=" m-5 mb-0 font-bold text-4xl text-gray-800">Welcome User </h1>
+
+      <EmployeeTable />
     </div>
   );
-}
+};
 
 export default Page;

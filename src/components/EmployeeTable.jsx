@@ -26,17 +26,13 @@ console.log(employeeId)
     "address",
   ];
 
-  const toggleEditMode = (id) => {
-    setOpen(true);
-  };
-  const handleExitEditMode = () => {
-    setOpen(false);
-  };
   
-  const TABLE_ROWS = employees.map((employee) => (
-    <tr key={employee.id}>
+  const TABLE_ROWS = employees.map((employee,index) => (
+    <tr key={employee.id} 
+    className={index % 2 === 0 ? 'bg-gray-100' : ''}
+    >
       {TABLE_HEAD.map((head) => (
-        <td key={head} className="p-4 border-b border-blue-gray-100">
+        <td key={head} className="p-2 border-b border-blue-gray-100">
           {head === "profile_photo" ? (
             <img
               className="rounded-xl w-20 h-24"
@@ -48,9 +44,15 @@ console.log(employeeId)
           )}
         </td>
       ))}
-      <td className="p-4 border-b border-blue-gray-100">
+      <td className="p-2 border-b border-blue-gray-100">
         {/* Edit Button  */}
-        <SButton className="bg-amber-400" onClick={() => {}}>
+        <SButton className="bg-amber-400" 
+        
+        onClick={() => {
+          setMode('edit');
+          setEmployeeId(employee.id);
+          setOpen(true);
+        }}>
           <FontAwesomeIcon icon={faEdit} />
         </SButton>
 
@@ -72,15 +74,7 @@ console.log(employeeId)
   // console.log("ROWS", TABLE_ROWS);
   return (
     <>
-      <SButton
-        onClick={() => {
-          setMode("create");
-          setOpen(true);
-        }}
-      >
-        {" "}
-        Create <FontAwesomeIcon icon={faAdd} />
-      </SButton>
+     
 
       <AddNewModal
         open={open}
@@ -93,14 +87,14 @@ console.log(employeeId)
         setEmployeeId={setEmployeeId}
       />
 
-      <Card className="h-full w-fit overflow-scroll">
-        <table className="w-fit min-w-max table-auto text-left">
+      <Card className=" w-fit border-8 border-gray-500 ">
+        <table className=" w-fit min-w-max table-auto text-left rounded-2xl ">
           <thead>
-            <tr>
+            <tr >
               {TABLE_HEAD.map((head) => (
                 <th
                   key={head}
-                  className="border-b border-blue-gray-100 bg-blue-gray-50 p-4 text-center"
+                  className=" border-b border-gray-100 bg-gray-500 text-white p-4 text-center z-10"
                 >
                   <Typography
                     variant="small"
@@ -111,7 +105,7 @@ console.log(employeeId)
                   </Typography>
                 </th>
               ))}
-              <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4 text-center">
+              <th className="  border-b border-gray-100 bg-gray-500 text-white p-4 text-center">
                 <Typography
                   variant="small"
                   color="blue-gray"
@@ -122,7 +116,7 @@ console.log(employeeId)
               </th>
             </tr>
           </thead>
-          <tbody>{TABLE_ROWS}</tbody>
+          <tbody className=" h-36 overflow-auto">{TABLE_ROWS}</tbody>
         </table>
       </Card>
     </>
