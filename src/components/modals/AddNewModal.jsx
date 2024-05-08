@@ -36,23 +36,20 @@ export function AddNewModal({
   setEmployeeId,
 }) {
   const nanoid = customAlphabet("0123456789", 4);
+
+  //for clear form and initial form state
   const emptyForm = {
-  id: "",
-  name: "",
-  email: "",
-  dob: "",
-  city: "",
-  state: "",
-  phone: "",
-  address: "",
-  profile_photo: "",
-};
-  const [formData, setFormData] = useState(emptyForm)
-  // const handleOpen = () => {
-  //   prepareForm();
-  //   setOpen(!open);
-  //   if (!open) { clearForm(); }
-  // };
+    id: "",
+    name: "",
+    email: "",
+    dob: "",
+    city: "",
+    state: "",
+    phone: "",
+    address: "",
+    profile_photo: "",
+  };
+  const [formData, setFormData] = useState(emptyForm);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -65,14 +62,15 @@ export function AddNewModal({
     }
   };
   useEffect(() => {
-    console.log("phone",formData)
-    if(!open){
+    console.log("phone", formData);
+    if (!open) {
       setEmployeeId(null);
       clearForm();
     }
     prepareForm();
   }, [employeeId, open]);
 
+  //fill the data of the employee with the selected employee id , in the modal form
   const prepareForm = () => {
     if (mode === "edit" || mode === "view") {
       const employee = employees.find((emp) => emp.id === employeeId);
@@ -83,15 +81,18 @@ export function AddNewModal({
       }
     }
   };
+  //  to clear the form
   const clearForm = () => {
     setFormData(emptyForm);
   };
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
+  //Save the Edits
   const handleChangeSave = () => {
     setEmployees(
       employees.map((emp) =>
@@ -100,33 +101,31 @@ export function AddNewModal({
     );
     clearForm();
     setOpen(false);
-   
-    
   };
 
-
-const createNewEmployee = () => {
-  setEmployees([
-    ...employees,
-    {
-      id: nanoid(),
-      name: formData.name,
-      email: formData.email,
-      dob: formData.dob,
-      city: formData.city,
-      state: formData.state,
-      phone: formData.phone,
-      address: formData.address,
-      profile_photo: formData.profile_photo,
-    },
-  ]);
-};
-
-const handleAddProfile = () => {
-  createNewEmployee();
-  handleOpen();
-  clearForm();
-};
+  // Create new employee
+  const createNewEmployee = () => {
+    setEmployees([
+      ...employees,
+      {
+        id: nanoid(),
+        name: formData.name,
+        email: formData.email,
+        dob: formData.dob,
+        city: formData.city,
+        state: formData.state,
+        phone: formData.phone,
+        address: formData.address,
+        profile_photo: formData.profile_photo,
+      },
+    ]);
+  };
+  //Save the new employee details
+  const handleAddProfile = () => {
+    createNewEmployee();
+    handleOpen();
+    clearForm();
+  };
 
   return (
     <div className="flex items-center  justify-center ">
@@ -140,10 +139,9 @@ const handleAddProfile = () => {
         Create <FontAwesomeIcon icon={faAdd} />
       </SButton>
       <Dialog
-        
         open={open}
         handler={handleOpen}
-       className="  bg-transparent flex justify-center items-center h-5/6 p-20 shadow-none"
+        className="  bg-transparent flex justify-center items-center h-5/6 p-20 shadow-none"
       >
         <Card className="mx-auto  my-10 border-2 bg-white  shadow-2xl p-5 w-full h-full overflow-scroll max-w-[24rem] ">
           <DialogHeader className="justify-between">

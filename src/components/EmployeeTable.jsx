@@ -13,7 +13,8 @@ export const EmployeeTable = () => {
   const [mode, setMode] = useState("create");
   const [employees, setEmployees] = useState(employeesData);
   const [employeeId, setEmployeeId] = useState(null);
-console.log(employeeId)
+// console.log(employeeId)
+
   const TABLE_HEAD = [
     "profile_photo",
     "id",
@@ -26,7 +27,7 @@ console.log(employeeId)
     "address",
   ];
 
-  
+  //show each employee in table 
   const TABLE_ROWS = employees.map((employee,index) => (
     <tr key={employee.id} 
     className={index % 2 === 0 ? 'bg-gray-100' : ''}
@@ -45,7 +46,9 @@ console.log(employeeId)
         </td>
       ))}
       <td className="p-2 border-b border-blue-gray-100">
+       
         {/* Edit Button  */}
+       
         <SButton className="bg-amber-400" 
         
         onClick={() => {
@@ -56,7 +59,9 @@ console.log(employeeId)
           <FontAwesomeIcon icon={faEdit} />
         </SButton>
 
+       
         {/* View Button  */}
+       
         <SButton
           className="bg-blue-400"
           onClick={() => {
@@ -70,11 +75,9 @@ console.log(employeeId)
       </td>
     </tr>
   ));
-  // console.log("HEADING", TABLE_HEAD);
-  // console.log("ROWS", TABLE_ROWS);
+ 
   return (
-    <>
-     
+    <>     
 
       <AddNewModal
         open={open}
