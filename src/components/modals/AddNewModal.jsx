@@ -29,7 +29,7 @@ import { customAlphabet } from 'nanoid';
 
 export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setMode, employeeId, setEmployeeId }) {
   const nanoid = customAlphabet('0123456789', 4);
-  const empId = employeeId;
+
   const [formData, setFormData] = useState({
     id: '',
     name: '',
@@ -48,7 +48,7 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
   };
   const prepareForm = () => {
     if (mode === 'edit' || mode === 'view') {
-      const employee = employees.find(emp => emp.id === empId)
+      const employee = employees.find(emp => emp.id === employeeId)
       if (employee) {
         setFormData(employee);
       }
@@ -100,7 +100,7 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
 
   return (
     <div className="flex items-c  justify-c ">
-      <SButton onClick={() => { handleOpen(); }}>  Create <FontAwesomeIcon icon={faAdd} /></SButton>
+      
       <Dialog
         size="xs"
         open={open}
