@@ -13,7 +13,7 @@ export const EmployeeTable = () => {
   const [mode, setMode] = useState("create");
   const [employees, setEmployees] = useState(employeesData);
   const [employeeId, setEmployeeId] = useState(null);
-
+console.log(employeeId)
   const TABLE_HEAD = [
     "profile_photo",
     "id",

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faA,
@@ -27,7 +27,7 @@ import Title from "../Title";
 import Input from "../Input";
 import { customAlphabet } from 'nanoid';
 
-export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setMode, employeeId, setEmployeeId }) {
+export function AddNewModal({open, setOpen, employees, setEmployees, mode, setMode, employeeId, setEmployeeId}) {
   const nanoid = customAlphabet('0123456789', 4);
 
   const [formData, setFormData] = useState({
@@ -46,6 +46,10 @@ export function AddNewModal({ open, setOpen, employees, setEmployees, mode, setM
     setOpen(!open);
     if (!open) { clearForm(); }
   };
+  useEffect(() => {
+    prepareForm();
+  }, [employeeId, open]);
+
   const prepareForm = () => {
     if (mode === 'edit' || mode === 'view') {
       const employee = employees.find(emp => emp.id === employeeId)
