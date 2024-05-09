@@ -5,7 +5,7 @@ import Page from "./Page";
 function App() {
  
   return (
-    <div  >
+    <div className=" " >
      <Page/>
     </div>
   );

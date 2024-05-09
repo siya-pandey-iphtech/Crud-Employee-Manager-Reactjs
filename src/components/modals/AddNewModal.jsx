@@ -19,6 +19,7 @@ import {
   Typography,
   Checkbox,
   Button,
+  DialogFooter,
 } from "@material-tailwind/react";
 import SButton from "../Button";
 import Title from "../Title";
@@ -129,29 +130,26 @@ export function AddNewModal({
 
   return (
     <div className="flex items-center  justify-center ">
-      <SButton
-        onClick={() => {
-          setMode("create");
-          setOpen(true);
-        }}
-      >
-        {" "}
-        Create <FontAwesomeIcon icon={faAdd} />
-      </SButton>
       <Dialog
         open={open}
         handler={handleOpen}
-        className="  bg-transparent flex justify-center items-center h-5/6 p-20 shadow-none"
+        className="  bg-transparent flex justify-center items-center h-screen p-20 shadow-none"
       >
-        <Card className="mx-auto  my-10 border-2 bg-white  shadow-2xl p-5 w-full h-full overflow-scroll max-w-[24rem] ">
-          <DialogHeader className="justify-between">
-            <div className="flex justify-center  items-center  text-center ">
+        <Card className="mx-auto  my-10 border-2 bg-white  shadow-2xl p-5 w-fit h-full overflow-auto  ">
+          <DialogHeader className="justify-between  bg-white   sticky top-0">
+            <div className="flex  w-full justify-center  items-center ">
               {mode === "edit" ? (
-                <Title className="text-c ">Edit Details</Title>
+                <Title className="text-center text-blue-500 font-lobster font-bold text-3xl ">
+                  Edit Details
+                </Title>
               ) : mode === "view" ? (
-                <Title className="text-c ">View User</Title>
+                <Title className="text-center text-blue-500 font-lobster font-bold text-3xl">
+                  View User
+                </Title>
               ) : (
-                <Title className="text-c ">Create New</Title>
+                <Title className="text-center text-blue-500 font-lobster font-bold text-3xl  ">
+                  Create New{" "}
+                </Title>
               )}
             </div>
 
@@ -161,7 +159,18 @@ export function AddNewModal({
               onClick={handleOpen}
             />
           </DialogHeader>
-          <CardBody className="flex flex-col gap-4  ">
+          <div className="flex justify-center items-center border-2 rounded-lg border-blue-400 h-32 w-32 mx-auto my-4">
+            <img
+              src={
+                formData.profile_photo ||
+                "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+              }
+              alt="Profile"
+              className="object-cover h-full rounded-lg w-full"
+            />
+          </div>
+
+          <CardBody className="grid grid-cols-2 gap-4  ">
             <Input
               disabled={mode === "view"}
               label=" Name "
@@ -224,20 +233,24 @@ export function AddNewModal({
               name="profile_photo"
               value={formData.profile_photo}
               type="text"
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+              }}
             />
+          </CardBody>
+          <DialogFooter className=" flex  items-center p-0 justify-center  bg-white sticky bottom-0">
             {mode === "edit" ? (
-              <SButton onClick={handleChangeSave}>
+              <SButton onClick={handleChangeSave} className="col-span-2">
                 Save Changes <FontAwesomeIcon icon={faEdit} />
               </SButton>
             ) : mode === "view" ? (
               ""
             ) : (
-              <SButton onClick={handleAddProfile}>
+              <SButton onClick={handleAddProfile} className=" w-full col-span-2">
                 Add <FontAwesomeIcon icon={faAdd} />
               </SButton>
             )}
-          </CardBody>
+          </DialogFooter>
         </Card>
       </Dialog>
     </div>
