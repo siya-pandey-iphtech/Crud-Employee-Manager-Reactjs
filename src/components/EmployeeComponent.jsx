@@ -136,7 +136,7 @@ export const EmployeeComponent = () => {
         {/* Edit Button  */}
 
         <SButton
-          className="bg-amber-400 "
+          className="bg-amber-400 mx-1"
           onClick={() => {
             setMode("edit");
             setEmployeeId(employee.id);
@@ -149,7 +149,7 @@ export const EmployeeComponent = () => {
         {/* View Button  */}
 
         <SButton
-          className="bg-blue-400"
+          className="bg-blue-400 mx-1"
           onClick={() => {
             setMode("view");
             setEmployeeId(employee.id);

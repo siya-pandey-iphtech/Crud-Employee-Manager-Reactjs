@@ -43,15 +43,19 @@ export function AddNewModal({
     clearForm();
   };
 
-  return (
-    <div className="flex items-center  justify-center ">
+  
+
+return (
+  <div className="flex items-center justify-center" 
+    
+     >
       <Dialog
         open={open}
         handler={handleOpen}
         className="  bg-transparent flex justify-center items-center h-screen p-5 sm:p-20 shadow-none"
       >
-        <Card className="mx-auto  my-10 border-2 bg-white  shadow-2xl p-1 sm:p-5 w-full sm:w-fit h-full overflow-auto  ">
-          <DialogHeader className="justify-between  bg-white   sticky top-0 z-10">
+        <Card className="mx-auto  my-10 border-2 bg-white  shadow-2xl p-1 sm:p-5 sm:py-0 w-full sm:w-fit h-full overflow-auto  " >
+          <DialogHeader className="justify-between  bg-white  sticky top-0 mt-0 z-10">
             <div className="flex  w-full justify-center  items-center ">
               {mode === "edit" ? (
                 <Title className="text-center text-blue-500 font-lobster font-bold text-3xl ">
