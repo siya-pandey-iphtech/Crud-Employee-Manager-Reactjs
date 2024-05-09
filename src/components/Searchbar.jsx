@@ -4,8 +4,8 @@ import SButton from "./Button";
 const Searchbar = ({handleSearch}) => {
 
   return (
-    <div className="w-96">
-      <form className=" border-2  border-blue-400  rounded-xl max-w-md mx-auto">
+    <div className="w-full mb-2 ">
+      <form className=" border-2  border-blue-400  rounded-xl sm:max-w-md w-full">
         <label
           htmlFor="default-search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only "

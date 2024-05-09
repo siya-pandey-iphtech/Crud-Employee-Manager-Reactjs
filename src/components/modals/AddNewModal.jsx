@@ -1,126 +1,41 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faA,
-  faAdd,
-  faClose,
-  faEdit,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faClose, faEdit } from "@fortawesome/free-solid-svg-icons";
 import {
   Dialog,
   DialogHeader,
-  DialogBody,
-  IconButton,
   Card,
-  CardHeader,
   CardBody,
-  CardFooter,
-  Typography,
-  Checkbox,
-  Button,
   DialogFooter,
 } from "@material-tailwind/react";
 import SButton from "../Button";
 import Title from "../Title";
 import Input from "../Input";
-import { customAlphabet } from "nanoid";
 
 export function AddNewModal({
   open,
-  setOpen,
-  employees,
-  setEmployees,
   mode,
-  setMode,
   employeeId,
   setEmployeeId,
+  handleChangeSave,
+  handleOpen,
+  prepareForm,
+  createNewEmployee,
+  formData,
+  clearForm,
+  handleChange,
 }) {
-  const nanoid = customAlphabet("0123456789", 4);
-
-  //for clear form and initial form state
-  const emptyForm = {
-    id: "",
-    name: "",
-    email: "",
-    dob: "",
-    city: "",
-    state: "",
-    phone: "",
-    address: "",
-    profile_photo: "",
-  };
-  const [formData, setFormData] = useState(emptyForm);
-
-  const handleOpen = () => {
-    setOpen(!open);
-    if (open) {
-      // if the dialog is currently open, it's about to be closed
-      clearForm();
-    } else {
-      // if the dialog is currently closed, it's about to be opened
-      prepareForm();
-    }
-  };
   useEffect(() => {
-    console.log("phone", formData);
+    
     if (!open) {
       setEmployeeId(null);
       clearForm();
     }
     prepareForm();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [employeeId, open]);
 
-  //fill the data of the employee with the selected employee id , in the modal form
-  const prepareForm = () => {
-    if (mode === "edit" || mode === "view") {
-      const employee = employees.find((emp) => emp.id === employeeId);
-      if (employee) {
-        setFormData(employee);
-      } else {
-        clearForm();
-      }
-    }
-  };
-  //  to clear the form
-  const clearForm = () => {
-    setFormData(emptyForm);
-  };
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-  //Save the Edits
-  const handleChangeSave = () => {
-    setEmployees(
-      employees.map((emp) =>
-        emp.id === employeeId ? { ...emp, ...formData } : emp
-      )
-    );
-    clearForm();
-    setOpen(false);
-  };
-
-  // Create new employee
-  const createNewEmployee = () => {
-    setEmployees([
-      ...employees,
-      {
-        id: nanoid(),
-        name: formData.name,
-        email: formData.email,
-        dob: formData.dob,
-        city: formData.city,
-        state: formData.state,
-        phone: formData.phone,
-        address: formData.address,
-        profile_photo: formData.profile_photo,
-      },
-    ]);
-  };
   //Save the new employee details
   const handleAddProfile = () => {
     createNewEmployee();
@@ -133,10 +48,10 @@ export function AddNewModal({
       <Dialog
         open={open}
         handler={handleOpen}
-        className="  bg-transparent flex justify-center items-center h-screen p-20 shadow-none"
+        className="  bg-transparent flex justify-center items-center h-screen p-5 sm:p-20 shadow-none"
       >
-        <Card className="mx-auto  my-10 border-2 bg-white  shadow-2xl p-5 w-fit h-full overflow-auto  ">
-          <DialogHeader className="justify-between  bg-white   sticky top-0">
+        <Card className="mx-auto  my-10 border-2 bg-white  shadow-2xl p-1 sm:p-5 w-full sm:w-fit h-full overflow-auto  ">
+          <DialogHeader className="justify-between  bg-white   sticky top-0 z-10">
             <div className="flex  w-full justify-center  items-center ">
               {mode === "edit" ? (
                 <Title className="text-center text-blue-500 font-lobster font-bold text-3xl ">
@@ -170,7 +85,7 @@ export function AddNewModal({
             />
           </div>
 
-          <CardBody className="grid grid-cols-2 gap-4  ">
+          <CardBody className="grid  sm:grid-cols-2 gap-4  ">
             <Input
               disabled={mode === "view"}
               label=" Name "
@@ -246,7 +161,10 @@ export function AddNewModal({
             ) : mode === "view" ? (
               ""
             ) : (
-              <SButton onClick={handleAddProfile} className=" w-full col-span-2">
+              <SButton
+                onClick={handleAddProfile}
+                className=" w-full col-span-2"
+              >
                 Add <FontAwesomeIcon icon={faAdd} />
               </SButton>
             )}
