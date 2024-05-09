@@ -106,7 +106,7 @@ export const EmployeeComponent = () => {
     setFilteredEmployees(
       employees.filter((data) =>
         TABLE_HEAD.some((param) =>
-          data[param].toString().toLowerCase().includes(searchQuery)
+          data[param].toString().toLowerCase().includes(searchQuery.toLowerCase())
         )
       )
     );
@@ -120,12 +120,12 @@ export const EmployeeComponent = () => {
           className="p-1.5 border-b border-blue-gray-100 text-left  text-gray-600 text-nowrap"
         >
           {head === "profile_photo" ? (
-           <div className="flex justify-center">
-            <img
-              className="rounded-xl w-20 h-24"
-              src={employee[head]}
-              alt={employee.name}
-            />
+            <div className="flex justify-center">
+              <img
+                className="rounded-xl w-20 h-24"
+                src={employee[head]}
+                alt={employee.name}
+              />
             </div>
           ) : (
             employee[head]
@@ -165,18 +165,20 @@ export const EmployeeComponent = () => {
   return (
     <>
       <div className="sm:flex   text-nowrap sm:justify-between  sm:items-center ">
-       <div className="flex justify-center">
-        <SButton
-          className=""
-          onClick={() => {
-            setMode("create");
-            setOpen(true);
-          }}
-        >
-          Create <FontAwesomeIcon icon={faAdd} />
-        </SButton>
-</div>
- <div className=" sm:w-96 w-full flexitems-center justify-center">        <Searchbar handleSearch={handleSearchChange} />
+        <div className="flex justify-center">
+          <SButton
+            className=""
+            onClick={() => {
+              setMode("create");
+              setOpen(true);
+            }}
+          >
+            Create <FontAwesomeIcon icon={faAdd} />
+          </SButton>
+        </div>
+        <div className=" sm:w-96 w-full flexitems-center justify-center">
+          {" "}
+          <Searchbar handleSearchChange={handleSearchChange} />
         </div>
       </div>
 
