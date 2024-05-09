@@ -8,7 +8,7 @@ import Searchbar from "./Searchbar";
 import { customAlphabet } from "nanoid";
 import CustomTable from "./CustomTable";
 
-export const EmployeeTable = () => {
+export const EmployeeComponent = () => {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState("create");
   const [employees, setEmployees] = useState(employeesData);
