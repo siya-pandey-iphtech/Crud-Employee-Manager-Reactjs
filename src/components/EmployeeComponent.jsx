@@ -106,7 +106,7 @@ export const EmployeeComponent = () => {
     setFilteredEmployees(
       employees.filter((data) =>
         TABLE_HEAD.some((param) =>
-          data[param].toString().toLowerCase().includes(searchQuery.toString().toLowerCase())
+          data[param].toString().toLowerCase().includes(searchQuery.toString().trimStart().trimEnd().toLowerCase())
         )
       )
     );
